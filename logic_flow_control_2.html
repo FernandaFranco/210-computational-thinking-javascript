@@ -1,0 +1,399 @@
+<body>
+  <script>
+    // Guessing the password
+    // var password = 'password';
+    // var guess;
+    // var attempts = 0;
+
+    // while (guess !== password) {
+    //   guess = prompt('What is the password');
+    //   if (guess === password) {
+    //     console.log('You have successfully logged in.');
+    //   } else {
+    //     attempts += 1;
+    //   }
+
+    //   if (attempts === 3) {
+    //     console.log('You have been denied access.');
+    //     break;
+    //   }
+    // }
+
+    // Student Grade
+    // function average(scores) {
+    //   var total = 0;
+    //   var quantity = scores.length;
+    //   for (var i = 0; i < quantity; i++) {
+    //     total += scores[i];
+    //   }
+
+    //   return total/quantity;
+    // }
+    // var score1 = Number(prompt('Enter score 1:'));
+    // var score2 = Number(prompt('Enter score 2:'));
+    // var score3 = Number(prompt('Enter score 3:'));
+    // var score4 = Number(prompt('Enter score 4:'));
+
+    // var scores = [score1, score2, score3, score4];
+    // average = average(scores);
+
+    // var grade = 'F';
+    // if (average >= 90) {
+    //   grade = 'A';
+    // } else if (average >= 70) {
+    //   grade = 'B';
+    // } else if (average >= 50) {
+    //   grade = 'C';
+    // }
+
+    // console.log('Base on the average of your 3 scores your letter grade is "' + grade + '".');
+
+    // Greatest common divisor
+    // function gcd(number1, number2) {
+    //   var min = Math.min(number1, number2);
+    //   var max = Math.max(number1, number2);
+    //   // for (var i = min; i >= 1; i--) {
+    //   //   if (min % i == 0 && max % i == 0) return i;
+    //   // }
+    //   var temp;
+    //   while (min !== 0) {
+    //     temp = min;
+    //     min = max % min;
+    //     max = temp;
+    //   }
+
+    //   return max;
+    // }
+
+    // console.log(gcd(12, 4));   // 4
+    // console.log(gcd(15, 10));  // 5
+    // console.log(gcd(9, 2));    // 1
+    // console.log(gcd(4, 12));   // 4
+    // console.log(gcd(10, 15));  // 5
+    // console.log(gcd(2, 9));    // 1
+
+    // function gcdExpanded(array) {
+    //   for (var i = 0; i < array.length - 1; i++) {
+    //     array[i + 1] = gcd(array[i], array[i + 1]);
+    //   }
+
+    //   return array[array.length - 1];
+    // }
+
+    // console.log(gcdExpanded([4, 8, 12]));// 4
+
+    // Goldbach Numbers
+    // function isPrime(number) {
+    //   var i;
+
+    //   if (number <= 1) {
+    //     return false;
+    //   }
+
+    //   if (number === 2) return true;
+
+    //   for (i = 3; i < number; i += 2) {
+    //     if (number % i === 0) {
+    //       return false;
+    //     }
+    //   }
+
+    //   return true;
+    // }
+
+
+    // function checkGoldbach(n) {
+    //   if (n % 2 === 1 || n < 4) {
+    //     console.log(null);
+    //     return;
+    //   }
+
+    //   var j;
+    //   for (var i = 2; i < n; i++) {
+    //     if (i >= j) break;
+    //     j = n - i;
+    //     if (isPrime(i) && isPrime(j)) {
+    //       console.log(i, j);
+    //     }
+    //   }
+    // }
+
+    // checkGoldbach(3);
+    // // logs: null
+
+    // checkGoldbach(4);
+    // // logs: 2 2
+
+    // checkGoldbach(12);
+    // // logs: 5 7
+
+    // checkGoldbach(100);
+    // // logs:
+    // // 3 97
+    // // 11 89
+    // // 17 83
+    // // 29 71
+    // // 41 59
+    // // 47 53
+
+    // Pattern Generation
+    // function generatePattern(n) {
+    //   var cummulative = '';
+    //   for (var i = 1; i <= n; i++) {
+    //     cummulative += String(i);
+    //     console.log(cummulative + '*'.repeat((2 * (n-i)) - (10 - i + 1)));
+    //   }
+    // }
+
+    // generatePattern(20);
+
+    // Index of substring
+    // function indexOf(firstString, secondString) {
+    //   var limit = firstString.length - secondString.length;
+    //   for (var i = 0; i <= limit; i++) {
+    //     for (var j = 0; j < secondString.length; j++) {
+    //       if (firstString[i + j] !== secondString[j]) break;
+    //       if (j === secondString.length - 1) return i;
+    //     }
+    //   }
+    //   return -1;
+    // }
+
+    // console.log(indexOf('Some strings', 's'));                      // 5
+    // console.log(indexOf('Blue Whale', 'Whale'));                    // 5
+    // console.log(indexOf('Blue Whale', 'Blute'));                    // -1
+    // console.log(indexOf('Blue Whale', 'leB'));                      // -1
+
+    // function lastIndexOf(firstString, secondString) {
+    //   var limit = firstString.length - secondString.length;
+    //   for (var i = limit; i >= 0; i--) {
+    //     for (var j = 0; j < secondString.length; j++) {
+    //       if (firstString[i + j] !== secondString[j]) break;
+    //       if (j === secondString.length - 1) return i;
+    //     }
+    //   }
+    //   return -1;
+    // }
+
+    // console.log(lastIndexOf('Some strings', 's'));                  // 11
+    // console.log(lastIndexOf('Blue Whale, Killer Whale', 'Whale'));  // 19
+    // console.log(lastIndexOf('Blue Whale, Killer Whale', 'all'));    // -1
+
+    //  Trimming spaces
+    // function trimLeft(string) {
+    //   var i;
+    //   var copyMode = false;
+    //   var newString = '';
+    //   for (i = 0; i < string.length; i++) {
+    //     if (string[i] !== ' ') {
+    //       copyMode = true;
+    //     }
+    //     if (copyMode) {
+    //       newString += string[i];
+    //     }
+    //   }
+
+    //   return newString;
+    // }
+
+    // function trimRight(newString) {
+    //   var i;
+    //   var copyMode = false;
+    //   var newerString = '';
+    //   for (i = newString.length - 1; i >= 0; i--) {
+    //     if (newString[i] !== ' ') {
+    //       copyMode = true;
+    //     }
+    //     if (copyMode) {
+    //       newerString = newString[i] + newerString;
+    //     }
+    //   }
+
+    //   return newerString;
+    // }
+
+    // function trim(string) {
+    //   return trimRight(trimLeft(string));
+    // }
+
+    // console.log(trim('  abc  '));  // "abc"
+    // console.log(trim('abc   '));   // "abc"
+    // console.log(trim(' ab c'));    // "ab c"
+    // console.log(trim(' a b  c'));  // "a b  c"
+    // console.log(trim('      '));   // ""
+    // console.log(trim(''));         // ""
+
+    // Splitting a String
+    // function splitString(string, delimiter) {
+    //   if (delimiter === undefined) return console.log("ERROR: No delimiter");
+
+    //   var splitted = '';
+    //   for (var i = 0; i < string.length; i++) {
+    //     if (delimiter === '') {
+    //       console.log(string[i]);
+    //     } else if (string[i] === delimiter) {
+    //       console.log(splitted);
+    //       splitted = '';
+    //     } else {
+    //       splitted += string[i];
+    //       if (i === string.length - 1) console.log(splitted);
+    //     }
+    //   }
+    // }
+
+    // splitString('hello');
+    // // logs:
+    // // ERROR: No delimiter
+
+    // splitString('hello', '');
+    // // logs:
+    // // h
+    // // e
+    // // l
+    // // l
+    // // o
+
+    // splitString('hello', ';');
+    // // logs:
+    // // hello
+
+    // splitString(';hello;', ';');
+    // // logs:
+    // //  (this is a blank line)
+    // // hello
+
+    // Repeating Strings
+    // function repeat(string, times) {
+    //   var i;
+    //   var newString;
+
+    //   if (times < 0 || Number(times) !== times) {
+    //     return undefined;
+    //   }
+
+    //   newString = '';
+    //   for (i = 1; i <= times; i++) {
+    //     newString += string;
+    //   }
+
+    //   return newString;
+    // }
+
+    // console.log(repeat('abc', 1));       // "abc"
+    // console.log(repeat('abc', 2));       // "abcabc"
+    // console.log(repeat('abc', -1));      // undefined
+    // console.log(repeat('abc', 0));       // ""
+    // console.log(repeat('abc', 'a'));     // undefined
+    // console.log(repeat('abc', false));   // undefined
+    // console.log(repeat('abc', null));    // undefined
+    // console.log(repeat('abc', '  '));    // undefined
+
+    // String startsWith
+    // function startsWith(string, searchString) {
+    //   if (searchString === '') return console.log(true);
+    //   console.log(indexOf(string, searchString) === 0);
+    // }
+
+    // var str = 'We put comprehension and mastery above all else';
+    // startsWith(str, 'We');              // true
+    // startsWith(str, 'We put');          // true
+    // startsWith(str, '');                // true
+    // startsWith(str, 'put');             // false
+
+    // var longerString = 'We put comprehension and mastery above all else!';
+    // startsWith(str, longerString);      // false
+
+    //  Converting strings to lower case
+    // function toLowerCase(string) {
+    //   var i;
+    //   var asciiNumeric;
+    //   var newString = '';
+    //   for (i = 0; i < string.length; i++) {
+    //     asciiNumeric = string.charCodeAt(i);
+    //     if (asciiNumeric >= 65 && asciiNumeric <= 90) {
+    //       asciiNumeric += 32;
+    //     }
+    //     newString += String.fromCharCode(asciiNumeric);
+    //   }
+
+    //   return newString;
+    // }
+
+    // console.log(toLowerCase('ALPHABET'));    // "alphabet"
+    // console.log(toLowerCase('123'));         // "123"
+    // console.log(toLowerCase('abcDEF'));      // "abcdef"
+
+    // Substring
+    function substr(string, start, length) {
+      var i;
+      var newString = '';
+      var strLength = string.length;
+
+      if (start < 0) {
+        start = strLength + start;
+      }
+
+      for (i = start; i < (start + length); i++) {
+        if (i >= strLength) break;
+        newString += string[i];
+      }
+
+      console.log(newString);
+    }
+
+    // var string = 'hello world';
+
+    // substr(string, 2, 4);      // "llo "
+    // substr(string, -3, 2);     // "rl"
+    // substr(string, 8, 20);     // "rld"
+    // substr(string, 0, -20);    // ""
+    // substr(string, 0, 0);      // ""
+
+    // Substring 2
+
+    function substring(string, start, end) {
+      var newString = '';
+      var temp;
+      var i;
+
+      if (end === undefined) {
+        end = string.length;
+      } else if (end < 0 || end !== Number(end)) {
+        end = 0;
+      }
+
+      if (start < 0 || start !== Number(start)) {
+        start = 0;
+      }
+
+      if (end < start) {
+        temp = start;
+        start = end;
+        end = temp;
+      }
+
+      if (start > string.length) {
+      start = string.length;
+      }
+
+      if (end > string.length) {
+        end = string.length;
+      }
+
+      for (i = start; i < end; i += 1) {
+        newString += string[i];
+      }
+
+      return newString;
+    }
+
+    var string = 'hello world';
+
+    console.log(substring(string, 2, 4));    // "ll"
+    console.log(substring(string, 4, 2));    // "ll"
+    console.log(substring(string, 0, -1));   // ""
+    console.log(substring(string, 2));       // "llo world"
+    console.log(substring(string, 'a'));     // "hello world"
+    console.log(substring(string, 8, 20));   // "rld"
+  </script>
+</body>

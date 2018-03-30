@@ -1,0 +1,108 @@
+<body>
+  <script>
+    // Odd numbers
+    // function logOddNumbers(integer) {
+    //   for (var number = 1; number <= integer; number++) {
+    //     if (number % 2 === 0) {
+    //       continue;
+    //     }
+
+    //     console.log(number);
+    //   }
+    // }
+
+    // logOddNumbers(19);
+
+    // Multiples of 3 and 5
+    // function multiplesOfThreeAndFive(first, last) {
+    //   for (var i = first; i <= last; i++) {
+    //     if (i % 3 === 0 && i % 5 === 0) {
+    //       console.log(String(i) + '!');
+    //     } else if (i % 3 === 0 || i % 5 === 0) {
+    //       console.log(String(i));
+    //     }
+    //   }
+    // }
+
+    // multiplesOfThreeAndFive(190, 300);
+
+    // Print Multiples
+    // function largestMultiple(number) {
+    //   return Math.floor(100 / number) * number;
+    // }
+
+    // function  logMultiples(number) {
+    //   for (var i = largestMultiple(number); i >= number; i -= number) {
+    //     if (i % 2 === 1) {
+    //       console.log(i);
+    //     }
+    //   }
+    // }
+
+    // logMultiples(17);
+    // logMultiples(21);
+
+    //  Fizzbuzz
+    // function fizzbuzz() {
+    //   var message;
+
+    //   for (var i = 1; i <= 100; i++) {
+    //     message = '';
+
+    //     if (i % 3 === 0) {
+    //       message += 'Fizz';
+    //     }
+
+    //     if (i % 5 === 0) {
+    //       message += 'Buzz';
+    //     }
+
+    //     console.log(message || i);
+    //   }
+    // }
+
+    // fizzbuzz();
+
+    // Prime Check
+    // function isPrime(number) {
+    //   var i;
+
+    //   if (number <= 1 || (number > 2 && number % 2 === 0)) {
+    //     return false;
+    //   }
+
+    //   if (number === 2) return true;
+
+    //   for (i = 3; i < number; i += 2) {
+    //     if (number % i === 0) {
+    //       return false;
+    //     }
+    //   }
+
+    //   return true;
+    // }
+
+    // console.log(isPrime(1));   // false
+    // console.log(isPrime(2));   // true
+    // console.log(isPrime(3));   // true
+    // console.log(isPrime(43));  // true
+    // console.log(isPrime(55));  // false
+    // console.log(isPrime(0));   // false
+
+    // isXor
+    function isXor(value1, value2) {
+      return !!((value1 || value2) && !(value1 && value2));
+    }
+
+    console.log(isXor(false, true));     // true
+    console.log(isXor(true, false));     // true
+    console.log(isXor(false, false));    // false
+    console.log(isXor(true, true));      // false
+
+
+    console.log(isXor(false, 3));        // true
+    console.log(isXor('a', undefined));  // true
+    console.log(isXor(null, ''));        // false
+    console.log(isXor('2', 23));         // false
+  </script>
+</body>
