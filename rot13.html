@@ -1,0 +1,37 @@
+<body>
+  <script>
+    function rot13(string) {
+      var i;
+      var newChar;
+      var newString = '';
+
+      for (i = 0; i < string.length; i += 1) {
+        newChar = shift13(string[i]);
+        newString += newChar;
+      }
+
+      return newString;
+    }
+
+    function shift13(char) {
+      var asciiNumeric = char.charCodeAt(0);
+
+      if ((char >= 'a' && char <= 'm') ||
+          (char >= 'A' && char <= 'M')) {
+        asciiNumeric += 13;
+      } else if ((char >= 'n' && char <= 'z') ||
+                 (char >= 'N' && char <= 'Z')) {
+        asciiNumeric -= 13;
+      }
+
+      return String.fromCharCode(asciiNumeric);
+    }
+
+    console.log(rot13('Teachers open the door, but you must enter by yourself.'));
+    // logs: Grnpuref bcra gur qbbe, ohg lbh zhfg ragre ol lbhefrys.
+
+    console.log(rot13(rot13('Teachers open the door, but you must enter by yourself.')));
+
+    console.log(rot13('12343434%^&*#8'));
+  </script>
+</body>
