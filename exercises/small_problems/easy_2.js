@@ -137,9 +137,37 @@
 // console.log(getGrade(95, 90, 93));    // "A"
 // console.log(getGrade(50, 50, 95));    // "D"
 
-function cleanUp(string) {
-  var newString = string.replace(/[^a-zA-Z]+/g, ' ');
-  return newString;
+// function cleanUp(string) {
+//   var newString = string.replace(/[^a-zA-Z]+/g, ' ');
+//   return newString;
+// }
+
+// console.log(cleanUp("---what's my +*& line?"));
+
+function century(year) {
+  var prefix = Math.ceil(year / 100);
+  var suffix = 'th';
+  var tensDigit = Math.floor((prefix % 100) / 10);
+
+  if (tensDigit === 1) {
+    suffix = 'th';
+  } else if ((prefix % 10) === 1) {
+    suffix = 'st';
+  } else if ((prefix % 10) === 2){
+    suffix = 'nd';
+  } else if ((prefix % 10) === 3) {
+    suffix = 'rd';
+  }
+
+  return String(prefix) + suffix;
 }
 
-console.log(cleanUp("---what's my +*& line?"));
+console.log(century(2000));        // "20th"
+console.log(century(2001));        // "21st"
+console.log(century(1965));        // "20th"
+console.log(century(256));         // "3rd"
+console.log(century(5));           // "1st"
+console.log(century(10103));       // "102nd"
+console.log(century(1052));        // "11th"
+console.log(century(1127));        // "12th"
+console.log(century(11201));       // "113th"
