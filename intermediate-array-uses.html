@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Arrays</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      function oddElementsOf(arr) {
+        var newArr = [];
+
+        for (var i = 1; i < arr.length; i += 2) {
+            newArr.push(arr[i]);
+        }
+
+        return newArr;
+      }
+
+      var digits = [4, 8, 15, 16, 23, 42];
+
+      // console.log(oddElementsOf(digits));
+
+      function combinedArray(even, odd) {
+        var newArr = [];
+        var i;
+
+        for (i = 0; i < even.length; i++) {
+          newArr.push(even[i]);
+          newArr.push(odd[i]);
+        }
+
+        return newArr;
+      }
+
+      var digits = [4, 8, 15, 16, 23, 42];
+      var letters = ['A', 'L', 'V', 'A', 'R', 'H'];
+
+      // console.log(combinedArray(digits, letters));  // returns [4, "A", 8, "L", 15, "V", 16, "A", 23, "R", 42, "H"]
+
+      function mirrowedArray(arr) {
+        var secondArr = arr.slice().reverse(); //slice creates shallow copy. Otherwise reverse would mutate our arr array, and we don't want that
+
+        return arr.concat(secondArr); // concat does not mutate arr
+      }
+
+      var digits = [1, 2, 3, 4];
+      // console.log(mirrowedArray(digits));
+      // console.log(digits);
+
+      function sortDescending(arr) {
+        return arr.slice().sort(function(a, b) { return b - a; });
+      }
+
+      var array = [23, 4, 16, 42, 8, 15];
+      var result = sortDescending(array);  // returns [42, 23, 16, 15, 8, 4]
+      // console.log(result);                 // logs    [42, 23, 16, 15, 8, 4]
+      // console.log(array);                  // logs    [23, 4, 16, 42, 8, 15]
+
+      function matrixSums(arr) {
+        var i;
+        var newArr = [];
+
+        for (i = 0; i < arr.length; i++) {
+          newArr[i] = arr[i].reduce(function(accumulator, currValue) { return accumulator + currValue; });
+        }
+
+        return newArr;
+      }
+
+      // console.log(matrixSums([[2, 8, 5], [12, 48, 0], [12]]));  // returns [15, 60, 12]
+
+      function uniqueElements(arr) {
+        var i;
+        var newArr = [];
+        for (i = 0; i < arr.length; i++) {
+          if (newArr.indexOf(arr[i]) === -1) {
+            newArr.push(arr[i]);
+          }
+        }
+
+        return newArr;
+      }
+
+      // console.log(uniqueElements([1, 2, 4, 3, 4, 1, 5, 4]));  // returns [1, 2, 4, 3, 5]
+
+      function missing(arr) {
+        var newArr = [];
+        var number;
+
+        for (number = arr[0] + 1; number < arr[arr.length - 1]; number++) {
+          if (arr.indexOf(number) === -1) {
+            newArr.push(number);
+          }
+        }
+
+        return newArr;
+      }
+
+      console.log(missing([-3, -2, 1, 5]));                  // [-1, 0, 2, 3, 4]
+      console.log(missing([1, 2, 3, 4]));                    // []
+      console.log(missing([1, 5]));                          // [2, 3, 4]
+      console.log(missing([6]));                             // []
+
+    </script>
+  </body>
+</html>
