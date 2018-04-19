@@ -1,0 +1,28 @@
+<body>
+  <script>
+    function repeatedCharacters(string) {
+      var array = string.toLowerCase().split('');
+      var collection = {};
+      for (index in array) {
+        if (collection[array[index]] === undefined) {
+          collection[array[index]] = 0
+        };
+        collection[array[index]] += 1;
+      }
+
+      for (key in collection) {
+        if (collection[key] === 1) {
+          delete collection[key];
+        }
+      }
+
+      return collection;
+    }
+
+    console.log(repeatedCharacters('Programming'));    // { r: 2, g: 2, m: 2 }
+    console.log(repeatedCharacters('Combination'));    // { o: 2, i: 2, n: 2 }
+    console.log(repeatedCharacters('Pet'));            // {}
+    console.log(repeatedCharacters('Paper'));          // { p: 2 }
+    console.log(repeatedCharacters('Baseless'));       // { s: 3, e: 2 }
+  </script>
+</body>
