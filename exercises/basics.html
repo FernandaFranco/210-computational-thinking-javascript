@@ -6,6 +6,78 @@
   </head>
   <body>
     <script type="text/javascript">
+      var CHARS_TO_NUMBERS = {
+        '0': 0,
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+      }
+
+      function stringToInteger(numericText) {
+        var number = 0;
+        var numericChars = numericText.split('');
+        var reversedNumericChars = numericChars.reverse();
+        var converted;
+        for (var i = 0; i < reversedNumericChars.length; i++) {
+          converted = CHARS_TO_NUMBERS[reversedNumericChars[i]];
+          number += converted * Math.pow(10, i);
+        }
+
+        return number;
+      }
+
+      // console.log(stringToInteger('4321'));      // 4321
+      // console.log(stringToInteger('570'));       // 570
+
+      function stringToSignedInteger(numericText) {
+        switch (numericText[0]) {
+          case '+': return stringToInteger(numericText.slice(1));
+          case '-': return -stringToInteger(numericText.slice(1));
+          default:  return stringToInteger(numericText);
+        }
+      }
+
+      // console.log(stringToSignedInteger('4321'));      // 4321
+      // console.log(stringToSignedInteger('-570'));      // -570
+      // console.log(stringToSignedInteger('+100'));      // 100
+
+      var NUMERIC_CHARS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+      function integerToString(integer) {
+        var string = '';
+
+        do {
+          string = NUMERIC_CHARS[integer % 10] + string;
+          integer = Math.floor(integer / 10);
+        } while (integer > 0);
+
+        return string;
+      }
+
+      // console.log(integerToString(4321));      // "4321"
+      // console.log(integerToString(0));         // "0"
+      // console.log(integerToString(5000));      // "5000"
+      // var cinquecento = 500;
+      // console.log(integerToString(cinquecento));      // "500"
+
+      function signedIntegerToString(integer) {
+        if (integer === 0) return '0';
+
+        switch (integer > 0) {
+          case true: return '+' + integerToString(integer);
+          case false: return '-' + integerToString(-integer);
+        }
+      }
+
+      console.log(signedIntegerToString(4321));      // "+4321"
+      console.log(signedIntegerToString(-123));      // "-123"
+      console.log(signedIntegerToString(0));         // "0"
 
     </script>
   </body>
