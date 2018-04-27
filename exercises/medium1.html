@@ -1,0 +1,65 @@
+<body>
+  <script type="text/javascript">
+    // console.log((false && undefined)); //false
+    // console.log((false || undefined)); //undefined
+    // console.log(((false && undefined) || (false || undefined))); //undefined
+    // console.log(((false || undefined) || (false && undefined))); //false
+    // console.log(((false && undefined) && (false || undefined))); //false
+    // console.log(((false || undefined) && (false && undefined))); //undefined
+    // console.log(('a' || (false && undefined) || '')); //'a'
+    // console.log(((false && undefined) || 'a' || '')); //'a'
+    // console.log(('a' && (false || undefined) && '')); //undefined
+    // console.log(((false || undefined) && 'a' && '')); //undefined
+
+    var row;
+    var i;
+    var j;
+
+    function padLeft(number, multiplier) {
+      var stringNumber = String(number);
+      var padding = ' ';
+      if (multiplier === 10) {
+        return stringNumber.length <= 2 ? padding + stringNumber : stringNumber;
+      }
+      return stringNumber.length <= 1 ? padding + stringNumber : stringNumber;
+    }
+
+    for (i = 1; i <= 10; i += 1) {
+      row = '';
+      for (j = 1; j <= 10; j += 1) {
+        row += padLeft(i * j, j) + ' ';
+      }
+
+      // console.log(row + '\n');
+    }
+
+    function getSelectedColumns(numbers, cols) {
+    var result = [];
+
+    for (var i = 0, numLength = numbers.length; i < numLength; i += 1) {
+      for (var j = 0, colLength = cols.length; j < colLength; j += 1) {
+        if (!result[j]) {
+          result[j] = [];
+        }
+
+        result[j][i] = numbers[i][cols[j]];
+      }
+    }
+
+    return result;
+  }
+
+  // given the following arrays of number arrays
+  var array1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+  var array2 = [[1, 2, 3], [1, 2, 3], [1, 2, 3]];
+
+  // `array1` in row/column format
+  // [[1, 2, 3],
+  //  [4, 5, 6],
+  //  [7, 8, 9]]
+
+  console.log(getSelectedColumns(array1, [0]));     // [[1]];            expected: [[1, 4, 7]]
+  console.log(getSelectedColumns(array1, [0, 2]));  // [[1, 4], [3, 6]]; expected: [[1, 4, 7], [3, 6, 9]]
+  console.log(getSelectedColumns(array2, [1, 2]));  // [[2, 2], [3, 4]]; expected: [[2, 2, 2], [3, 3, 3]]
+  </script>
+</body>
