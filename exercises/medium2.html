@@ -1,0 +1,28 @@
+<body>
+  <script type="text/javascript">
+    // write a function that takes an argument caller
+    // return another function
+
+    function doubler(number, caller) {
+      console.log('This function was called by ' + caller + '.');
+      return number + number;
+    }
+
+    doubler(5, 'Victor');                   // returns 10
+    // logs:
+    // This function was called by Victor.
+
+    function makeDoubler(presetName) {
+      return function (number) {
+        console.log('This function was called by ' + presetName + '.');
+        return number + number;
+      };
+    }
+
+    var doubler = makeDoubler('Fernanda');
+    console.log(doubler(5));                             // returns 10
+    // logs:
+    // This function was called by Fernanda.
+
+  </script>
+</body>
