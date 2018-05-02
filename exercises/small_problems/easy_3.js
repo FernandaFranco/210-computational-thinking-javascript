@@ -131,12 +131,41 @@ function swap(string) {
     var temp = chars[0];
     chars[0] = chars[chars.length - 1];
     chars[chars.length - 1] = temp;
-    RETURN chars.join('');
+    return chars.join('');
   });
 
   return swappedWords.join(' ');
 }
 
-console.log(swap('Oh what a wonderful day it is'));  // "hO thaw a londerfuw yad ti si"
-console.log(swap('Abcde'));                          // "ebcdA"
-console.log(swap('a'));                              // "a"
+// console.log(swap('Oh what a wonderful day it is'));  // "hO thaw a londerfuw yad ti si"
+// console.log(swap('Abcde'));                          // "ebcdA"
+// console.log(swap('a'));                              // "a"
+
+function wordSizes(string) {
+  var sizes = {};
+  var words = string.split(' ');
+  var word;
+  var wordSize;
+
+  for (var i = 0; i < words.length; i += 1) {
+    if (words[i] === '') continue;
+    word = words[i].match(/[a-z]+/gi).join('');
+    wordSize = word.length;
+
+    sizes[wordSize] = sizes[wordSize] || 0;
+    sizes[wordSize] += 1;
+  }
+
+  return sizes;
+}
+
+// console.log(wordSizes('Four score and seven.'));                       // { "3": 1, "4": 1, "5": 1, "6": 1 }
+// console.log(wordSizes('Hey diddle diddle, the cat and the fiddle!'));  // { "3": 5, "6": 1, "7": 2 }
+// console.log(wordSizes("What's up doc?"));                              // { "2": 1, "4": 1, "6": 1 }
+// console.log(wordSizes(''));                                            // {}
+console.log(wordSizes('   reeba'));
+
+console.log(wordSizes('Four score and seven.'));                       // { "3": 1, "4": 1, "5": 2 }
+console.log(wordSizes('Hey diddle diddle, the cat and the fiddle!'));  // { "3": 5, "6": 3 }
+console.log(wordSizes("What's up doc?"));                              // { "5": 1, "2": 1, "3": 1 }
+console.log(wordSizes(''));                                            // {}
