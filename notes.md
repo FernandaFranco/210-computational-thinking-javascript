@@ -1,7 +1,3 @@
-- anonymous function (function expression?)
-
-
-
 ================================================
 Be able to explain clearly the following topics:
 ================================================
@@ -51,7 +47,7 @@ VARIABLE SCOPES
 
 JavaScript's lexical scoping rules: variable scoping rules describe how and where the language finds and retrieves values from previously declared variables.
 
-In JavaScript, every Function creates a new variable scope. The code within a Function inherits access to all variables in all surrounding scopes
+In JavaScript, every Function creates a new variable scope. The code within a Function inherits access to all variables in all surrounding scopes. Scoping in JavaScript is function-level, not block-level.
 
 LEXICAL SCOPING
 
@@ -71,9 +67,17 @@ If a function definition has a parameter with the same name as a variable from a
 
 HOISTING
 
-function declarations AND definitions are hoisted to the top, above variable declarations. variable declarations are hoisted to the top but below functions. variable initializations stay in its original place in code.
+JavaScript processes variable declarations before it executes any code within a scope. So, declaring a variable anywhere in a scope is equivalent to declaring it at the top of the scope. function declarations INCLUDING THE BODY are hoisted to the top, above regular variable declarations. variable declarations are hoisted to the top but below functions. variable initializations (assignments) stay in its original place in code.
+
+Function expressions often involve assigning a function to a declared variable; since such expressions are just variable declarations, they obey the hoisting rules for variable declarations.
+
+
 
 - function declarations, expressions and scopes
+
+A function declaration (sometimes called a "function statement") defines a variable whose type is function.
+A function expression defines a function as part of a larger expression syntax (typically a variable assignment). Also called anonymous function when isn't named. Though most function expressions use anonymous functions, named function expressions are useful for debugging.
+
 
 STATEMENT VS EXPRESSION
 
