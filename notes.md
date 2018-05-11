@@ -25,7 +25,7 @@ TEMPORARY TYPE COERCION
 
 when we try to access a property or call a method on a string primitive, JavaScript automatically converts it to a String object. As such, we can use the String.prototype.NAME_HERE property with a string primitive.
 
-when primitive values call a method, javascript temporarily coerces it to it's object correspondent in order to execute that method, since primitives don't have methods.
+when primitive values call a method, javascript temporarily coerces it to it's object correspondent in order to execute that method, since primitives don't have methods. undefined has no built-in object counterpart.
 
 IMPLICIT COERCION
 
@@ -87,6 +87,8 @@ Unlike expressions, statements in JavaScript don't necessarily resolve to a valu
 
 - object properties and mutation
 
+Objects are mutable: you can modify them without changing their identity. Objects contain data inside themselves; it's this inner data that you can change.
+
 arrays are implemented with objects internally. arrays have a length property, which objects do not.
 
 - assignments and comparison
@@ -101,7 +103,12 @@ Recall that strings are compared based on standard lexicographical ordering, usi
 
 OBJECTS COMPARISON
 
-=== returns true only for the same object (not different objects holding same values)
+Just like with arrays, the arithmetic and comparison operators are not very useful with objects and often lead to surprising results. When one operand is an object and the other is not an object, JavaScript typically coerces the object to the string '[object Object]'
+
+However, if an object literal is used in certain contexts—such as at the beginning of a line—JavaScript interprets it as a block of code instead of as an object:
+
+== and === returns true only for the same object (not different objects holding same values)
+
 
 - pure functions and side effects
 
