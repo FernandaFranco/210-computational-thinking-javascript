@@ -131,4 +131,14 @@ If you use a function for its return value, you usually want the function call a
 If you use a function for a side effect, try to pass the variable(s) you will mutate as argument(s).
 
 
+===============
+After the test:
+===============
+
+Until now: imperative style. Worrying about 'how' to do stuff
+CSS: declarative code. very high level of abstraction
+
+LIST PROCESSING
+
+If your code needs an early return while processing a list, consider using a for loop instead of a forEach method. The JavaScript list processing abstractions, other than every and some, all traverse the entire list, and that may be wasted effort.
 
