@@ -142,3 +142,7 @@ LIST PROCESSING
 
 If your code needs an early return while processing a list, consider using a for loop instead of a forEach method. The JavaScript list processing abstractions, other than every and some, all traverse the entire list, and that may be wasted effort.
 
+Not feeling very confident here: https://launchschool.com/lessons/aec1a7d1/assignments/35ad2da3
+
+Too many abstractions, confusing amount of functions
+
