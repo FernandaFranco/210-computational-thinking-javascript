@@ -250,60 +250,82 @@ var studentScores = {
 };
 
 function generateClassRecordSummary(scores) {
+  var scoreData = Object.keys(scores).map(function (student) {
+    return scores[student].scores;
+  });
+
+  var examData = scoreData.map(function (score) {
+    return score.exams;
+  });
+
   return {
-    studentGrades: generateStudentGrades(scores),
-    exams: [],
+    studentGrades: scoreData.map(function (scoreObj) {
+      return getStudentScore(scoreObj);
+    }),
+    exams: getExamSummary(examData),
   }
 }
 
-function generateStudentGrades(students) {
-  var averageExamGrades = Object.keys(students).map(function (studentKey) {
-    return students[studentKey].scores.exams.reduce(sum)/4;
+function getStudentScore(scoreObj) {
+  var averageExamGrade = scoreObj.exams.reduce(function (total, score) {
+    return total + score;
+  })/4;
+
+  var totalExerciseGrade = scoreObj.exercises.reduce(function (total, score) {
+    return total + score;
   });
 
-  var totalExerciseGrades = Object.keys(students).map(function (studentKey) {
-    return students[studentKey].scores.exercises.reduce(sum);
-  });
-
-  var weightedAverageExamGrades = averageExamGrades.map(function (grade) {
-    return grade * .65;
-  });
-
-  var weightedTotalExerciseGrades = totalExerciseGrades.map(function (grade) {
-    return grade * .35;
-  });
-
-  var percentGrades = weightedAverageExamGrades.map(function (examGrade, index) {
-    return Math.round(examGrade + weightedTotalExerciseGrades[index]);
-  });
+  var percentageGrade = Math.round(averageExamGrade * .65 + totalExerciseGrade * .35);
 
 
-  var letterGrades = percentGrades.map(function (grade) {
-    if (grade >= 93) {
+  var getLetterGrade = function (percentageGrade) {
+    if (percentageGrade >= 93) {
       return 'A';
-    } else if (grade >= 85 && grade <= 92){
+    } else if (percentageGrade >= 85 && percentageGrade <= 92){
       return 'B';
-    } else if (grade >= 77 && grade <= 84){
+    } else if (percentageGrade >= 77 && percentageGrade <= 84){
       return 'C';
-    } else if (grade >= 69 && grade <= 76){
+    } else if (percentageGrade >= 69 && percentageGrade <= 76){
       return 'D';
-    } else if (grade >= 60 && grade <= 68) {
+    } else if (percentageGrade >= 60 && percentageGrade <= 68) {
       return 'E';
-    } else if (grade <= 59) {
+    } else if (percentageGrade <= 59) {
       return 'F';
     }
-  });
+  }
 
-  return percentGrades.map(function(percentGrade, index) {
-    return String(percentGrade) + ' (' + letterGrades[index] + ')';
-  });
+  return String(percentageGrade) + ' (' + getLetterGrade(percentageGrade) + ')';
 }
 
-function sum(total, score) {
-  return total + score;
+function getExamSummary(examData) {
+  var exam1Scores = [];
+  var exam2Scores = [];
+  var exam3Scores = [];
+  var exam4Scores = [];
+  var allExamsScores;
+  var allExamsStats;
+
+  examData.forEach(function (studentExams) {
+    exam1Scores.push(studentExams[0]);
+    exam2Scores.push(studentExams[1]);
+    exam3Scores.push(studentExams[2]);
+    exam4Scores.push(studentExams[3]);
+  });
+
+  allExamsScores = [exam1Scores, exam2Scores, exam3Scores, exam4Scores];
+
+  return allExamsScores.map(function (examScores) {
+    return {
+      average: examScores.reduce(function (total, score) { return total += score })/5,
+      minimum: examScores.reduce(function (min, score) {
+        return score < min ? score : min;
+      }),
+      maximum: examScores.reduce(function (max, score) {
+        return score > max ? score : max;
+      }),
+    }
+  });
 }
-
-
 
 console.log(generateClassRecordSummary(studentScores));
 
@@ -317,3 +339,30 @@ console.log(generateClassRecordSummary(studentScores));
 //     { average: 91.8, minimum: 80, maximum: 100 },
 //   ],
 // }
+
+function isAllUnique(string) {
+  var seen = {};
+  var lowerCasedString = string.toLowerCase();
+  var i;
+
+  for (i = 0; i < string.length; i += 1) {
+    if (lowerCasedString[i] === ' ') {
+      continue;
+    }
+
+    if (seen[lowerCasedString[i]]) {
+      return false;
+    } else {
+      seen[lowerCasedString[i]] = true;
+    }
+  }
+
+  return true;
+}
+
+console.log(isAllUnique('The quick brown fox jumped over a lazy dog'));  // false
+console.log(isAllUnique('123,456,789'));                                 // false
+console.log(isAllUnique('The big apple'));                               // false
+console.log(isAllUnique('The big apPlE'));                               // false
+console.log(isAllUnique('!@#$%^&*()'));                                  // true
+console.log(isAllUnique('abcdefghijklmnopqrstuvwxyz'));                  // true

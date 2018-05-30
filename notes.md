@@ -146,3 +146,11 @@ Not feeling very confident here: https://launchschool.com/lessons/aec1a7d1/assig
 
 Too many abstractions, confusing amount of functions
 
+FUNCTIONAL PROGRAMMING / COLLECTION ABSTRACTION
+
+JavaScript doesn't provide as many functional abstractions and data structures as Clojure and haskell, for example. JavaScript doesn't have a unique abstraction that we can use to detect unique values in a list.
+
+The lack of many common abstractions is why many people use libraries like Underscore or Lodash to enhance JavaScript with more functional abstractions.
+
+
+
