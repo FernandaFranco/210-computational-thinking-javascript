@@ -114,7 +114,7 @@ console.log(palindromes('madam'));      // [ "madam", "ada" ]
 console.log(palindromes('hello-madam-did-madam-goodbye'));
 // returns
 // [ "ll", "-madam-", "-madam-did-madam-", "madam", "madam-did-madam", "ada",
-  // "adam-did-mada", "dam-did-mad", "am-did-ma", "m-did-m", "-did-", "did",
+  // "adam-did-mada", "dam-did-mfunkbeerad", "am-did-ma", "m-did-m", "-did-", "did",
   // "-madam-", "madam", "ada", "oo" ]
 
 console.log(palindromes('knitting cassettes'));
@@ -136,3 +136,44 @@ function buyFruit(list) {
 
 console.log(buyFruit([['apple', 3], ['orange', 1], ['banana', 2]]));
 // returns ["apple", "apple", "apple", "orange", "banana", "banana"]
+
+function transactionsFor(inventoryItem, transactions) {
+  return transactions.filter(function (inventory) {
+    return inventory.id === inventoryItem;
+  })
+}
+
+var transactions = [ { id: 101, movement: 'in',  quantity:  5 },
+                     { id: 105, movement: 'in',  quantity: 10 },
+                     { id: 102, movement: 'out', quantity: 17 },
+                     { id: 101, movement: 'in',  quantity: 12 },
+                     { id: 103, movement: 'out', quantity: 15 },
+                     { id: 102, movement: 'out', quantity: 15 },
+                     { id: 105, movement: 'in',  quantity: 25 },
+                     { id: 101, movement: 'out', quantity: 18 },
+                     { id: 102, movement: 'in',  quantity: 22 },
+                     { id: 103, movement: 'out', quantity: 15 }, ];
+
+console.log(transactionsFor(101, transactions));
+// returns
+// [ { id: 101, movement: "in",  quantity:  5 },
+  // { id: 101, movement: "in",  quantity: 12 },
+  // { id: 101, movement: "out", quantity: 18 }, ]
+
+function isItemAvailable(item, transactions) {
+  var quantity;
+  var balance = transactionsFor(item, transactions).reduce(function (total, transaction) {
+    quantity = transaction.quantity;
+    if (transaction.movement === 'out') {
+      quantity = - quantity;
+    }
+    return total + quantity;
+  }, 0);
+
+  return balance > 0;
+
+}
+
+console.log(isItemAvailable(101, transactions));     // false
+console.log(isItemAvailable(105, transactions));     // true
+

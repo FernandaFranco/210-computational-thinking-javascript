@@ -1,0 +1,71 @@
+<body>
+  <script>
+    var firstName = 'Fernanda';
+    var lastName = 'Franco';
+    var fullName = firstName.concat(' ', lastName);
+
+    console.log(fullName);
+
+    var names = fullName.split(' ');
+    console.log(names);
+
+    var language = 'JavaScript';
+    var idx = language.indexOf('S');
+    console.log(idx);
+
+    var charCode = language.charCodeAt(idx);
+    console.log(charCode);
+
+    console.log(String.fromCharCode(charCode));
+
+    console.log(language.lastIndexOf('a'));
+
+    var a = 'a';
+    var b = 'b';
+    console.log(a > b);
+
+    var b = 'B';
+    console.log(a > b);
+
+    var aIndex = language.indexOf('a');
+    var vIndex = language.indexOf('v');
+
+    console.log(language.substr(aIndex, 4));
+    console.log(language.substr(vIndex, 4));
+    console.log(language.substring(aIndex, 4));
+    console.log(language.substring(vIndex, 4));
+
+    var fact1 = 'JavaScript is fun';
+    var fact2 = 'Kids like it too';
+
+    compoundSentence = fact1 + ' and ' + fact2.toLowerCase();
+    console.log(compoundSentence);
+
+    console.log(fact1[0], fact2[0]);
+
+    var pi = 22/7;
+    pi = pi.toString();
+    console.log(pi.lastIndexOf('14'));
+
+    var boxNumber = (356).toString(); // JavaScript interprets the period immediately after a number as a decimal point, not a method separator.
+    console.log(boxNumber);
+
+    boxNumber = parseInt(boxNumber, 10);
+    console.log(typeof boxNumber);
+
+    boxNumber = String(boxNumber);
+    console.log(typeof boxNumber);
+
+    var name = prompt('What is your name?');
+    var message = 'Hello ' + name + '.';
+
+    if (name.endsWith('!')) {
+      message = 'HELLO ' + name.slice(0, -1).toUpperCase() +
+      '. WHY ARE WE SCREAMING?';
+    }
+
+    console.log(message);
+
+
+  </script>
+</body>
