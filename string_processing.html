@@ -14,5 +14,15 @@
 
     console.log(countWordInText('the', text));    // 2
     console.log(countWordInText('dog', text));    // 1
+
+    function reverse(string) {
+      var array = string.split('').reverse();
+
+      return array.join('');
+    }
+
+    console.log(reverse('hello'));                  // returns "olleh"
+    console.log(reverse('The quick brown fox'));    // returns "xof nworb kciuq ehT"
+
   </script>
 </body>
