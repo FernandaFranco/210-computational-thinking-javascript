@@ -12,8 +12,8 @@
       }).length;
     }
 
-    console.log(countWordInText('the', text));    // 2
-    console.log(countWordInText('dog', text));    // 1
+    // console.log(countWordInText('the', text));    // 2
+    // console.log(countWordInText('dog', text));    // 1
 
     function reverse(string) {
       var array = string.split('').reverse();
@@ -21,8 +21,214 @@
       return array.join('');
     }
 
-    console.log(reverse('hello'));                  // returns "olleh"
-    console.log(reverse('The quick brown fox'));    // returns "xof nworb kciuq ehT"
+    // console.log(reverse('hello'));                  // returns "olleh"
+    // console.log(reverse('The quick brown fox'));    // returns "xof nworb kciuq ehT"
+
+    // function acronym(string) {
+    //   return string.replace(/(\B\w|\W)/g, '').toUpperCase();
+    // }
+
+    function acronym(string) {
+      var stringArray = string.split(/[ -]/);
+      var initials;
+
+      initials = stringArray.map(function (word) {
+        return word[0].toUpperCase();
+      });
+
+      return initials.join('')
+    }
+
+    // console.log(acronym('Portable Network Graphics'));                  // "PNG"
+    // console.log(acronym('First In, First Out'));                        // "FIFO"
+    // console.log(acronym('PHP: HyperText Preprocessor'));                // "PHP"
+    // console.log(acronym('Complementary metal-oxide semiconductor'));    // "CMOS"
+    // console.log(acronym('Hyper-text Markup Language'));                 // "HTML"
+
+
+    // function isValidEmail(email) {
+    //   var atIndex = email.indexOf('@');
+    //   var localPart;
+    //   var domainPart;
+
+    //   if (atIndex === -1 || atIndex !== email.lastIndexOf('@')) {
+    //     return false;
+    //   }
+
+    //   localPart = email.slice(0, atIndex);
+    //   domainPart = email.slice(atIndex + 1);
+
+    //   return isValidLocal(localPart) && isValidDomain(domainPart);
+    // }
+
+    // function isValidLocal(localPart) {
+    //   return localPart.split('').every(function (char) {
+    //     return char.match(/[0-9a-zA-Z]/g)
+    //   });
+    // }
+
+    // function isValidDomain(domainPart) {
+    //   if (domainPart.indexOf('.') === -1) {
+    //     return false;
+    //   }
+
+    //   return domainPart.split('.').every(function (component) {
+    //     if (component.length === 0) {
+    //       return false;
+    //     }
+    //       return !component.match(/[^a-zA-Z]+/g);
+    //   });
+    // }
+
+    function isValidEmail(email) {
+      var pattern = /^[0-9a-z]+@[a-z]+(\.[a-z]+)+$/i;
+      return  pattern.test(email);
+    }
+
+    // console.log(isValidEmail('Foo@baz.com.ph'));          // returns true
+    // console.log(isValidEmail('Foo@mx.baz.com.ph'));       // returns true
+    // console.log(isValidEmail('foo@baz.com'));             // returns true
+    // console.log(isValidEmail('foo@baz.ph'));              // returns true
+    // console.log(isValidEmail('HELLO123@baz'));            // returns false
+    // console.log(isValidEmail('foo.bar@baz.to'));          // returns false
+    // console.log(isValidEmail('foo@baz.'));                // returns false
+    // console.log(isValidEmail('foo_bat@baz'));             // returns false
+    // console.log(isValidEmail('foo@bar.a12'));             // returns false
+    // console.log(isValidEmail('foo_bar@baz.com'));         // returns false
+    // console.log(isValidEmail('foo@bar.....com'));         // returns false
+
+    var isBalanced = function (string) {
+      var openParenthesis = 0;
+
+      for (var i = 0; i < string.length; i++) {
+        if (string[i] === '(') {
+          openParenthesis += 1;
+        } else if (string[i] === ')') {
+          openParenthesis -= 1;
+        }
+
+        if (openParenthesis < 0) {
+          return false;
+        }
+      }
+
+      return openParenthesis === 0;
+    }
+
+    console.log(isBalanced('What (is) this?'));        // true
+    console.log(isBalanced('What is) this?'));         // false
+    console.log(isBalanced('What (is this?'));         // false
+    console.log(isBalanced('((What) (is this))?'));    // true
+    console.log(isBalanced('((What)) (is this))?'));   // false
+    console.log(isBalanced('Hey!'));                   // true
+    console.log(isBalanced(')Hey!('));                 // false
+    console.log(isBalanced('What ((is))) up('));       // false
+
+    var textExcerpt = 'To be or not to be-that is the question:\n' +
+    'Whether \'tis nobler in the mind to suffer\n' +
+    'The slings and arrows of outrageous fortune,\n' +
+    'Or to take arms against a sea of troubles,\n' +
+    'And, by opposing, end them. To die, to sleep-\n' +
+    'No more-and by a sleep to say we end\n' +
+    'The heartache and the thousand natural shocks\n' +
+    'That flesh is heir to-\'tis a consummation\n' +
+    'Devoutly to be wished. To die, to sleep-\n' +
+    'To sleep, perchance to dream. Aye, there\'s the rub,\n' +
+    'For in that sleep of death what dreams may come,\n' +
+    'When we have shuffled off this mortal coil,\n' +
+    'Must give us pause. There\'s the respect\n' +
+    'That makes calamity of so long life.\n' +
+    'For who would bear the whips and scorns of time,\n' +
+    'Th\' oppressor\'s wrong, the proud man\'s contumely, [F: poor]\n' +
+    'The pangs of despised love, the law’s delay, [F: disprized]\n' +
+    'The insolence of office, and the spurns\n' +
+    'That patient merit of the unworthy takes,\n' +
+    'When he himself might his quietus make\n' +
+    'With a bare bodkin? Who would fardels bear, [F: these Fardels]\n' +
+    'To grunt and sweat under a weary life,\n' +
+    'But that the dread of something after death,\n' +
+    'The undiscovered country from whose bourn\n' +
+    'No traveler returns, puzzles the will\n' +
+    'And makes us rather bear those ills we have\n' +
+    'Than fly to others that we know not of?\n' +
+    'Thus conscience does make cowards of us all,\n' +
+    'And thus the native hue of resolution\n' +
+    'Is sicklied o\'er with the pale cast of thought,\n' +
+    'And enterprises of great pitch and moment, [F: pith]\n' +
+    'With this regard their currents turn awry, [F: away]\n' +
+    'And lose the name of action.-Soft you now,\n' +
+    'The fair Ophelia.-Nymph, in thy orisons\n' +
+    'Be all my sins remembered';
+
+
+    var positiveWords = ['fortune', 'dream', 'love', 'respect', 'patience', 'devout', 'noble', 'resolution'];
+    var negativeWords = ['die', 'heartache', 'death', 'despise', 'scorn', 'weary', 'trouble', 'oppress'];
+
+    function sentiment(text) {
+      var words = text.toLowerCase().split(/[\W]+/);
+      var positives = words.filter(function (word) {
+        return positiveWords.indexOf(word) !== -1;
+      });
+
+      var negatives = words.filter(function (word) {
+        return negativeWords.indexOf(word) !== -1;
+      });
+
+      console.log('There are ' + String(positives.length) + ' positive words in the text.');
+      console.log('Positive sentiments: ' + positives.join(', '));
+      console.log('There are ' + String(negatives.length) + ' negative words in the text.');
+      console.log('Negative sentiments: ' + negatives.join(', '));
+
+      console.log('The sentiment of the text is ' + getSentiment(positives.length, negatives.length) + '.');
+    }
+
+    function getSentiment(positiveCount, negativeCount) {
+      var total = positiveCount - negativeCount;
+
+      if (total > 0) {
+        return 'Positive';
+      } else if (total < 0) {
+        return 'Negative';
+      } else {
+        return 'Neutral';
+      }
+    }
+
+    //sentiment(textExcerpt);
+
+    // console output
+
+    // There are 5 positive words in the text.
+    // Positive sentiments: fortune, dream, respect, love, resolution
+
+    // There are 6 negative words in the text.
+    // Negative sentiments: die, heartache, die, death, weary, death
+
+    // The sentiment of the text is Negative.
+
+    var positiveRegex = /(fortunes?)|(dream(s|t|ed)?)|(love(s|d)?)|(respect(s|ed)?)|(patien(ce|t)?)|(devout(ly)?)|(nobler?)|(resolut(e|ion)?)/gi;
+    var negativeRegex = /(die(s|d)?)|(heartached?)|(death)|(despise(s|d)?)|(scorn(s|ed)?)|(weary)|(troubles?)|(oppress(es|ed|or('s)?)?)/gi;
+
+    function sentiment(text) {
+
+      var positives = text.match(positiveRegex).map(function (word) {
+        return word.toLowerCase();
+      });
+
+      var negatives = text.match(negativeRegex).map(function (word) {
+        return word.toLowerCase();
+      });
+
+      console.log('There are ' + String(positives.length) + ' positive words in the text.');
+      console.log('Positive sentiments: ' + positives.join(', '));
+      console.log('There are ' + String(negatives.length) + ' negative words in the text.');
+      console.log('Negative sentiments: ' + negatives.join(', '));
+
+      console.log('The sentiment of the text is ' + getSentiment(positives.length, negatives.length) + '.');
+    }
+
+    sentiment(textExcerpt);
+
 
   </script>
 </body>
