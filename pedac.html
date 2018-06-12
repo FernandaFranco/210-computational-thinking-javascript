@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>PEDAC</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      // Suppose you have an arbitrary natural number (the target) and a set of one or more additional natural numbers (the factors). Write a program that computes the sum of all numbers from 1 up to the target number that are also multiples of one of the factors.
+      // For instance, if the target is 20, and the factors are 3 and 5, that gives us the list of multiples 3, 5, 6, 9, 10, 12, 15, 18. The sum of these multiples is 78.
+      // If no factors are given, use 3 and 5 as the default factors.
+
+      //input: a target natural number, one or more natural number factors (optional);
+      // output: sum of multiples of the factors smaller than target;
+
+      // requirements/rules:
+      // - multiples to be summed must be unique;
+      // - target is not included as a multiple;
+      // - 1 is smallest factor allowed;
+      // - if factors arguments are missing, use 3 and 5 instead;
+
+      // mental model:
+
+      // get multiples of factors and add to the array if and only if it's not already included. then sum all the multiples in array and return the sum
+
+      //test cases:
+      console.log(sumFactors(20, [3, 5]) === 78);
+      console.log(sumFactors(20) === 78);
+      console.log(sumFactors(20, [3]) === 63);
+      console.log(sumFactors(20, [5]) === 30);
+      console.log(sumFactors(1) === 0);
+      console.log(sumFactors(20, [19]) === 19);
+
+      // data structure:
+      // loop: populate array with factors multiples
+      // reduce array to an integer
+      // algorithm:
+      // - get first factor first multiple
+      // - if smaller than target, add to a empty array;
+      // - get second factor first multiple
+      // - if smaller than target, add to a empty array;
+      // - repeat for all factors;
+      // - get first factor second multiple
+      // - if smaller than target, add to a empty array;
+      // - repeat for all factors multiples smaller than target;
+      // - break loop if multiple greater than target;
+      // - use reduce method to sum all elements in array;
+      // - return sum;
+
+      function sumFactors(target, factorsArray) {
+        var multiplesArray = [];
+        var multiple;
+
+        if (!factorsArray) {
+          factorsArray = [3, 5];
+        }
+        factorsArray.forEach(function (factor) {
+          multiple = factor;
+          while (multiple < target) {
+            if (multiplesArray.indexOf(multiple) === -1) {
+              multiplesArray.push(multiple);
+            }
+
+            multiple += factor;
+          }
+        });
+
+        return multiplesArray.reduce(function (sum, value) {
+          return sum + value;
+        }, 0);
+      }
+
+
+    </script>
+  </body>
+</html>

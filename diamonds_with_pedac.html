@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Diamonds</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      // input: odd integer n
+      // output: print out diamond in a n x n grid
+      // requirements: takes an odd positive number starting from 1, and creates a grid with rows and columns with the length of both being the number. Use a * to create a diamond shape;
+      // rules: starts and ends with a single * at the middle of first row
+      // at the middle row, full row length is *;
+      // the problem requires a loop to console log strings containing the appropriate sequence of spaces and * to form a diamond. starts with one * and the rest of the n length as spaces surrounding. amount of * grow to the next odd number and amount of spaces decrease, until the middle row contains only *. it then starts to decrease to the lowest odd number until a single * is printed;
+      // data structure: string for rows
+      // algorithm: given an argument n, while row count is smaller than n, print a row made of (n - starsCount)/2 spaces, starsCount stars, and (n - starsCount)/2 spaces
+
+
+      function diamond(n) {
+        var starsCount = 1;
+        while (starsCount < n) {
+          console.log(' '.repeat((n-starsCount)/2) + '*'.repeat(starsCount));
+          starsCount += 2;
+        }
+
+        while (starsCount > 0) {
+          console.log(' '.repeat((n-starsCount)/2) + '*'.repeat(starsCount));
+          starsCount -= 2;
+        }
+      }
+
+      diamond(1);
+      diamond(3);
+      diamond(9);
+    </script>
+  </body>
+</html>
