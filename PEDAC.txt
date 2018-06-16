@@ -1,0 +1,33 @@
+Understand the problem: specific and explicit set of definitions and rules
+
+- input
+- output
+- definitions and rules
+-- How would you explain to a non-technical person the rules?
+-- Are there key concepts that need to be more clearly defined?
+-- Are there implied rules that need to be made explicit?
+
+
+Example: Comparing two version numbers
+
+- two strings containing digits and dots
+- compare first digits before first dots
+- if digit from version1 is greater than digit from version2, version1 is newer
+- if it is smaller, it is older
+- if it is the same, we need to compare the next set of digits before the next dot
+- the reasoning is the same
+- if at the end of the string we can't determine if version1 is newer or not, it means that both versions are equal
+
+Example: Write a function called doubler that doubles every value in an array
+
+input: array of numbers, strings and other types
+output: array with numbers multiplied by 2, strings repeated twice, and other types duplicated in the array
+
+questions to define requirements:
+- how to deal with empty arrays? return an empty array
+- what if array contains invalid element? every type is valid
+
+
+doubler([1, 2, 3]); // returns [2, 4, 6]
+doubler(['goal', 'score', 'music']); // returns ['goalgoal', 'scorescore', 'musicmusic']
+doubler(-10); // returns 'Invalid input'
