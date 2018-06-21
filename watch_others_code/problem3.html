@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Problem 3</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+      look up table: two letters per blocks
+      blocks cannot be repeated
+      input: word as candidate for spelling with blocks
+      output: true if word can be spelled, false otherwise
+      rules: words will only be able to be spelled with blocks if two letters don't share the same block
+      case insensitive
+
+      questions: what kinds of chars we need to deal with?
+      any cleaning needed?
+      assume only strings will be passed?
+
+      test cases:
+      isBlockWord('BATCH');      // true
+      isBlockWord('BUTCH');      // false
+      isBlockWord('jest');       // true
+      isBlockWord('bobobobobo');       // false
+      isBlockWord('z');       // true
+      isBlockWord('ZeBrA');       // true
+
+      data structures:
+      lookup table: array of arrays
+      input: string
+      body: array of strings (iteration, any?)
+      output: boolean
+
+      algorithm:
+      split string into array of letters
+      map to lowercase
+      for each letter, check if block has been used
+      if used, return false
+      if it reaches the end of the loop, return true
+
+      how to check if block has been used:
+      create an empty array to store the used pairs
+      given a letter check if the array contains it
+      if it doesn't, add pair to the array and return false
+      if it does, return true
+      */
+
+    var BLOCKS = [['B', 'O'], ['X', 'K'], ['D', 'Q'], ['C', 'P'], ['N', 'A'], ['G', 'T'], ['R', 'E'], ['F', 'S'], ['J', 'W'], ['H', 'U'], ['V', 'I'], ['L', 'Y'], ['Z', 'M']];
+
+    function isBlockWord(word) {
+      if (word.length < 1 || String(word) !== word) return false;
+      var letters = word.toUpperCase().split('');
+      var discarded = [];
+      var block;
+      var i;
+
+      for (i = 0; i < letters.length; i += 1) {
+        if (discarded.indexOf(letters[i]) > -1) {
+          return false;
+        } else {
+          block = findBlock(letters[i]);
+          discarded = discarded.concat(block);
+        }
+      }
+      return true;
+    }
+
+    function findBlock(letter) {
+      var j;
+
+      for (j = 0; j < BLOCKS.length; j += 1) {
+        if (BLOCKS[j].indexOf(letter) > -1) {
+          return BLOCKS[j];
+        }
+      }
+    }
+
+    /*
+    for each letter, find pair
+    if pair repeats, return false
+    after loop, return true
+    */
+
+    // function isBlockWord(word) {
+    //   var letters = word.toUpperCase().split('');
+    //   var blocksUsed = [];
+    //   var letter;
+
+    //   for (var i = 0; i < letters.length; i++) {
+    //     letter = letters[i];
+    //     for (var j = 0; j < BLOCKS.length; j++) {
+    //       if (BLOCKS[j].indexOf(letter) > -1) {
+    //         if (blocksUsed.indexOf(BLOCKS[j]) > -1) {
+    //           return false;
+    //         } else {
+    //           blocksUsed.push(BLOCKS[j]);
+    //           break;
+    //         }
+    //       }
+    //     }
+    //   }
+
+    // return true;
+    // }
+
+    console.log(isBlockWord('BATCH'));      // true
+    console.log(isBlockWord('BUTCH'));      // false
+    console.log(isBlockWord('jest'));       // true
+    console.log(isBlockWord('bobobobobo'));       // false
+    console.log(isBlockWord('z'));       // true
+    console.log(isBlockWord('ZeBrA'));       // false
+    console.log(isBlockWord(''));       // false
+    console.log(isBlockWord(11));       // false
+
+
+    </script>
+  </body>
+</html>

@@ -6,6 +6,63 @@
   </head>
   <body>
     <script>
+      // input: a string of numbers, spaces, dashes, dots and parenthesis
+      // output: if bad number, return 0000000000
+      // if good number, return string of 10 digits
+      // rules:
+      // a good number is:
+      // 10 digits
+      // 11 digits if the first digits is 1
+      // mental model of the problem: takes an user input phone number and cleans it up so it contains only 10 digits
+
+      // test cases:
+      console.log(phoneNumberCleaner('666-666-6666')); // returns '6666666666'
+      console.log(phoneNumberCleaner('666-666(6666')); // returns '6666666666'
+      console.log(phoneNumberCleaner('666.666(6666')); // returns '6666666666'
+      console.log(phoneNumberCleaner('666.666 6666')); // returns '6666666666'
+      console.log(phoneNumberCleaner('1666 666 6666')); // returns '6666666666'
+      console.log(phoneNumberCleaner('1 666 666 6666')); // returns '6666666666'
+      console.log(phoneNumberCleaner('66 666 6666')); // returns '0000000000'
+      console.log(phoneNumberCleaner('6 666 666 6666')); // returns '0000000000'
+      console.log(phoneNumberCleaner('66 666 666 6666')); // returns '0000000000'
+      console.log(phoneNumberCleaner('66a666 666 6666')); // returns '0000000000'
+      console.log(phoneNumberCleaner('')); // returns '0000000000'
+      console.log(phoneNumberCleaner(' ')); // returns '0000000000'
+
+      // data structures
+      // input: string
+      // trim method of String object
+      // output: new string? or mutate input?
+
+      // algorithm
+      // check if valid input?
+      // trim string out of everything that's not a digit
+      // check if remaining str length is 10 or 11. return 000... otherwise
+      // if length 10, return str
+      // if length 11, check if first digit is 1. return 000 otherwise
+      // return str trimmed out of 1
+
+      function phoneNumberCleaner(userPhoneNumber) {
+        var validPattern = /^[\d -\.\(\)]+$/;
+        var BAD_NUMBER = '0000000000';
+        var phoneNumber;
+        var length;
+
+        if (!validPattern.test(userPhoneNumber)) {
+          return BAD_NUMBER;
+        }
+
+        phoneNumber = userPhoneNumber.replace(/\D/g, '');
+        length = phoneNumber.length;
+
+        if (length === 10) {
+          return phoneNumber;
+        } else if (length === 11 && phoneNumber[0] === '1') {
+          return phoneNumber.slice(1);
+        } else {
+          return BAD_NUMBER;
+        }
+      }
 
     </script>
   </body>

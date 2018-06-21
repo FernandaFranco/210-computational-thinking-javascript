@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Problem 2</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+      Input: a string of digits and other chars representing a number
+      Output: true if valid number, false otherwise
+      Requirements: start from the right
+      Ignore non numeric char
+      Every two digits, double it
+      If doubled digit is >= 10, subtract 9
+      Sum all digits
+      If the sum ends with 0, return valid
+      Otherwise return false
+      Questions: edge cases? 0? empty string?
+
+      Test Cases:
+
+      isValid('1111'); // invalid
+      isValid('8763'); // valid
+      isValid('2323 2005 7766 3554'); // valid
+      isValid(''); // invalid
+      isValid('0'); // invalid?
+      isValid('1'); // invalid
+      isValid('50505050'); // invalid
+      isValid('0ofpdkj0917eu  j1121143re3[]-p[;231'); // ?
+
+      Data Structures
+      input: string
+      body: parse and transform, parse and reduce to a sum (ARRAY)
+      output: boolean
+
+      ALgorithm:
+      takes string, remove non numeric chars
+      split string into array, map to numbers
+      reverse array
+      for each 2 digits, double digit
+      if doubled digits > 10, subtract 9
+      reduce array to sum of digits
+      if sum is divisible by 10, return true
+      return false otherwise
+      */
+
+      function isValid(numberStr) {
+        var cleaned = numberStr.replace(/\D/g, '');
+        var digits = cleaned.split('').map(Number).reverse();
+
+        if (numberStr.length < 1) {
+          return false;
+        }
+
+        return (checkSum(digits) > 0 && checkSum(digits) % 10 === 0);
+      }
+
+      function checkSum(digitsArray) {
+        return digitsArray.reduce(function (sum, digit, idx) {
+          if (idx % 2 === 1) {
+            digit *= 2;
+            if (digit >= 10) {
+              digit -= 9;
+            }
+          }
+          return sum + digit;
+        }, 0);
+      }
+
+      console.log(isValid('1111')); // invalid
+      console.log(isValid('8763')); // valid
+      console.log(isValid('2323 2005 7766 3554')); // valid
+      console.log(isValid('')); // invalid
+      console.log(isValid('0')); // invalid
+      console.log(isValid('1')); // invalid
+      console.log(isValid('50505050')); // invalid
+      console.log(isValid('0ofpdkj0917eu  j1121143re3[]-p[;231')); // invalid
+
+
+      // find the check digit that would make a number valid
+      // return number + check digit
+      // input: valid number lacking check digit as a string
+      // output: full number as a string
+      // check digit is first digit from right to left
+      // isn't doubled
+      // use checksum on digits provided + 0 appended
+      // use checksum value to approximate to closest number divisible by 0
+      // difference is the check digit
+      // return string
+
+      function getValidNumber(numberStr) {
+        var cleaned = numberStr.replace(/\D/g, '');
+        var digits = cleaned.split('').map(Number).concat([0]).reverse();
+        var checkDigit;
+
+        checkDigit = 10 - (checkSum(digits) % 10);
+
+
+        return cleaned + String(checkDigit);
+      }
+
+      console.log(getValidNumber('2323 2005 7766 355'));
+      console.log(getValidNumber('1111'));
+    </script>
+  </body>
+</html>
