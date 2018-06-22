@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Problem 5</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      function railFenceCypher(message) {
+        var chars = message.replace(/\s/g, '');
+        console.log(chars);
+
+        var firstRow = [];
+        var secondRow = [];
+        var thirdRow = [];
+        var i;
+
+        for (i = 0; i < chars.length; i += 4) {
+          firstRow.push(chars[i]);
+        }
+
+        for (i = 1; i < chars.length; i += 2) {
+          secondRow.push(chars[i]);
+        }
+
+        for (i = 2; i < chars.length; i += 4) {
+          thirdRow.push(chars[i]);
+        }
+
+        return firstRow.concat(secondRow).concat(thirdRow).join('');
+      }
+
+      console.log(railFenceCypher('WE ARE DISCOVERED FLEE AT ONCE'));
+
+    </script>
+  </body>
+</html>

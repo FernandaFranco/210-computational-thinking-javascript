@@ -1,0 +1,39 @@
+encoding:
+input: sentence to encrypt as a string, number of rails as integer (n)
+output: encrypted string
+steps: remove spaces/non words
+
+algorithm:
+create n arrays, initialize it containing the chars at indexes 0, 1, 2.. n-1 respectively
+each array will be a rail of the fence
+first array: add chars at every n + 2 indexes;
+second array: add chars at every n indexes;
+third array: add chars at every n - 2 indexes;
+concat arrays in order;
+join array into string
+return string
+
+
+railFenceCypher('WE ARE DISCOVERED FLEE AT ONCE');
+
+decoding:
+input: encrypted string, number of rails as integer
+output: original message as string (minus spaces);
+steps: look at pattern
+fill first rail
+fill second rail
+fill third rail
+read words in zigzag format
+
+4:
+w.....i.....r
+.e...d.s...e
+..a.e...c.v
+...r.....o.
+3:
+w...e...c...r
+.e.r.d.s.o.e
+..a...i...v
+2:
+w.a.e.i.c.v.r
+.e.r.d.s.o.e.

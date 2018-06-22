@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Problem 4</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+input: list of numbers, short hand range notation
+only part of the number is written
+different separators - : ..
+limits are inclusive
+output: list of complete numbers
+rules: list input contains ranges and short hand notation
+three possible separators
+only significant digit of the number given (context)
+questions: input should always be a string?
+empty string? other data type?
+are separators always the same?
+
+test cases:
+completeNumbers('1,3,7,2,4,1') // returns [1, 3, 7, 12, 14, 21]
+completeNumbers('1-3,4,1-2') // returns [1, 2, 3, 4, 11, 12]
+completeNumbers('1:3,1:2') // returns [1, 2, 3, 11, 12]
+completeNumbers('1..3,1..2') // returns [1, 2, 3, 11, 12]
+completeNumbers('1:3,1..2') // returns [1, 2, 3, 11, 12]
+completeNumbers('1-3,1..2') // returns [1, 2, 3, 11, 12]
+completeNumbers('1-3,1:2') // returns [1, 2, 3, 11, 12]
+completeNumbers('1-3,1:2,-') // returns [1, 2, 3, 11, 12]
+completeNumbers('1-3-2-1,1:2') // returns [1, 2, 3, 4, 5, ,6,7, 8, 9, 10, 11, 12..21..31, 32]
+completeNumbers('') // returns []
+completeNumbers(10) // returns [10]
+
+data structures:
+input: list of numbers and ranges as a string
+body: split string into array of numbers and ranges
+output: array of numbers;
+
+algorithm:
+split string at ,
+for each range (string containing a range separator at the middle), replace range with numbers in that range (map string to array);
+for each number, map to closest number that ends with the value at the string (string to number)
+return flatten array
+
+how to determine closest number:
+if value is greater than last value in array, keep value; if not, sum 10 and try again
+
+string to array
+map array: for ranges, fill array until reaches the limit of range
+map array: transform strings to numbers, keep adding 10 until number is greater then previous number;
+return array
+      */
+
+      function completeNumbers(shortHandList) {
+        var ranges = shortHandList.split(',');
+        var values = ranges.map(function (range) {
+          var pattern = /\d+(\.{2}|:|-)\d+(\.{2}|:|-)?\d*/;
+          if (pattern.test(range)) {
+            var limits = range.split(/(\.{2}|:|-)/).map(Number);
+            var numbersInRange = [];
+            var i;
+
+            var upperLimit = limits[limits.length - 1];
+            while (upperLimit <= limits[limits.length - 1]) {
+              upperLimit += 10;
+            }
+            for (i = limits[0]; i <= upperLimit; i += 1) {
+              numbersInRange.push(i);
+            }
+
+            return numbersInRange;
+          } else {
+            return [Number(range)];
+          }
+        });
+
+        var result = [0];
+        values.forEach(function (list) {
+          while (result[result.length - 1] >= list[0]) {
+            list = list.map(function (number) {
+              return number + 10;
+            });
+          }
+          result = result.concat(list);
+        });
+
+        return result.slice(1);
+      }
+
+      /*
+for each number in string, check if smaller than last number in array
+if true, add 10 until greater
+
+if false, keep number
+push it to array
+
+      */
+      function completeNumbers(shortHandList) {
+        var numbers = shortHandList.split(/\D+/).map(Number);
+        var separators = shortHandList.match(/\D+/g);
+        var previousNumber = 0;
+        var result = [];
+        var i;
+
+        // extend numbers
+        for (i = 0; i < numbers.length; i += 1) {
+          while (numbers[i] <= previousNumber) {
+            numbers[i] += 10;
+          }
+
+          previousNumber = numbers[i];
+        }
+
+        // expand range
+        for (i = 0; i < separators.length; i += 1) {
+          if (/(\.{2}|:|-)/.test(separators[i])) {
+            var j;
+
+            for (j = numbers[i]; j < numbers[i + 1]; j += 1) {
+              result.push(j);
+            }
+          } else {
+            result.push(numbers[i]);
+          }
+        }
+
+        result.push(numbers[numbers.length - 1]);
+        return result;
+      }
+
+      console.log(completeNumbers('1:5:2')); // RETURNS [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      console.log(completeNumbers('1-6,7,9-2,5-4,45-1'));
+      console.log(completeNumbers('1,3,7,2,4,1')); // returns [1, 3, 7, 12, 14, 21]
+      console.log(completeNumbers('1-3,1-2')); // returns [1, 2, 3, 11, 12]
+      console.log(completeNumbers('1:3,1:2')); // returns [1, 2, 3, 11, 12]
+      console.log(completeNumbers('1..3,1..2')); // returns [1, 2, 3, 11, 12]
+      console.log(completeNumbers('1:3,1..2')); // returns [1, 2, 3, 11, 12]
+      console.log(completeNumbers('1-3,1..2')); // returns [1, 2, 3, 11, 12]
+      console.log(completeNumbers('1-3,1:2')); // returns [1, 2, 3, 11, 12]
+      console.log(completeNumbers('1-3,1:2')); // returns [1, 2, 3, 11, 12]
+    </script>
+  </body>
+</html>
