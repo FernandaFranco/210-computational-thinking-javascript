@@ -6,32 +6,118 @@
   </head>
   <body>
     <script>
-      function railFenceCypher(message) {
-        var chars = message.replace(/\s/g, '');
-        console.log(chars);
+      // function railFenceCypher(message, railsNumber) {
+      //   var chars = message.toLowerCase().replace(/\s/g, '').split('');
+      //   var i;
+      //   var rails = [];
 
-        var firstRow = [];
-        var secondRow = [];
-        var thirdRow = [];
+      //   for (i = 0; i < railsNumber; i += 1) {
+      //     rails.push([]);
+      //   }
+
+      //   var railIndices = [0];
+      //   var goUp = false;
+      //   var j;
+
+      //   for (j = 1; j < chars.length; j += 1) {
+      //     if (goUp) {
+      //       railIndices.push(railIndices[j - 1] - 1);
+      //     } else {
+      //       railIndices.push(railIndices[j - 1] + 1);
+      //     }
+
+      //     if ((railIndices[j] === railsNumber - 1) || (railIndices[j] === 0)) {
+      //       goUp = !goUp;
+      //     }
+      //   }
+
+      //   chars.forEach(function (char) {
+      //     var railIndex = railIndices[charIndex];
+      //     rails[railIndex].push(char);
+      //   });
+
+      //   return rails.reduce(function (prev, curr) {
+      //     return prev.concat(curr);
+      //   }).join('');
+      // }
+
+      function railFenceEncoder(message, railsNumber) {
+        var chars = message.toLowerCase().replace(/\s/g, '').split('');
+        var railIndices = getRailIndices(railsNumber, chars.length);
+        var rails = [];
         var i;
 
-        for (i = 0; i < chars.length; i += 4) {
-          firstRow.push(chars[i]);
+        for (i = 0; i < railsNumber; i += 1) {
+          rails.push([]);
         }
 
-        for (i = 1; i < chars.length; i += 2) {
-          secondRow.push(chars[i]);
-        }
+        chars.forEach(function (char, charIndex) {
+          rails[railIndices[charIndex]].push(char);
+        });
 
-        for (i = 2; i < chars.length; i += 4) {
-          thirdRow.push(chars[i]);
-        }
-
-        return firstRow.concat(secondRow).concat(thirdRow).join('');
+        return rails.reduce(function (prev, curr) {
+          return prev.concat(curr);
+        }).join('');
       }
 
-      console.log(railFenceCypher('WE ARE DISCOVERED FLEE AT ONCE'));
+      function getRailIndices(railsNumber, charsLength) {
+        var result = [];
+        var railIndex = 0;
+        var i;
+        var direction;
 
+        for (i = 0; i < charsLength; i += 1) {
+          if (i === 0) {
+            result.push(railIndex);
+            continue;
+          }
+
+          if (railIndex === railsNumber - 1) {
+            direction = - 1;
+          } else if (railIndex === 0) {
+            direction = 1;
+          }
+
+          railIndex += direction;
+          result.push(railIndex);
+        }
+
+        return result;
+      }
+
+      console.log(railFenceEncoder('We ARE DISCOVERED FLEE AT ONCE', 3));
+
+/* input: encoded message. rows in sequence
+output: message decoded (without spaces)
+encoded message is a sequence of n rows
+problem: take that sequence and break into rows. once we have rows, iterate through indices array to get each (with shift) char of the message;
+how to break into rows? NO NEED
+ITERATE through chars and replace railIndices values with chars according to the following rule:
+find next value 0  and replace it with current char;
+do the same for every value 0, in order;
+when no value 0 left, find next value 1 and repeat;
+repeat for all values in railIndices;
+*/
+
+      function railFenceDecoder(code, railsNumber) {
+        var railIndices = getRailIndices(railsNumber, code.length);
+        var chars = railIndices;
+        var row = 0;
+        var i;
+
+        while (row < railsNumber - 1) {
+          for (i = 0; i < code.length; i += 1) {
+            if (chars.indexOf(row) === -1) {
+              row += 1;
+            }
+            chars[chars.indexOf(row)] = code[i];
+          }
+        }
+
+        return chars.join('');
+      }
+
+      console.log(railFenceDecoder('wecrlteerdsoeefeaocaivden', 3));
     </script>
   </body>
 </html>

@@ -1,0 +1,33 @@
+n switches: 1, 2, 3.. n
+n iterations:
+1st: toggle multiples of 1 (all switches)
+2nd: toggle multiples of 2 (2, 4, 6,...)
+3rd: toggle multiples of 3
+.
+.
+nth: toggle multiples of n
+
+output: array of switches that are on (1 is always one of them)
+
+test cases:
+
+lightsOn(5); //[1,4]
+lightsOn(3); //[1]
+lightsOn(2); //[1]
+lightsOn(1); //[1]
+lightsOn(0); //[]
+lightsOn(100); //[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+data structures:
+array of switches state: true or false (on or off);
+start with array of n length containing all falses
+
+algorithm:
+for each multiplier from 1 to n
+map array of switches
+transform each switch that is a multiple of current multiplier
+end for loop
+filter array of switches by which ones are on (true)
+return filtered array indices
+
+what is a multiple: n % m === 0

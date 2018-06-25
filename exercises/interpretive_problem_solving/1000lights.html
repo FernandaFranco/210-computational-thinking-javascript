@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>1000 Lights</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      function lightsOn(numberOfSwitches) {
+//         for each multiplier from 1 to n
+// map array of switches
+// transform each switch that is a multiple of current multiplier
+// end for loop
+// filter array of switches by which ones are on (true)
+// return filtered array
+
+// what is a multiple: n % m === 0
+        var switches = [];
+        var switchesOn = [];
+        var switchNumber;
+        var i;
+
+        for (i = 0; i < numberOfSwitches; i += 1) {
+          switches[i] = false;
+        }
+
+        for (i = 1; i <= numberOfSwitches; i += 1) {
+          switches = toggleLights(switches, i);
+        }
+
+        switches.forEach(function (switchState, switchIndex) {
+          switchNumber = switchIndex + 1;
+          if (switchState) {
+            switchesOn.push(switchNumber);
+          }
+        });
+
+        return switchesOn;
+      }
+
+      function toggleLights(switches, multiplier) {
+        return switches.map(function (switchState, switchIndex) {
+          switchNumber = switchIndex + 1;
+          if (switchNumber % multiplier === 0) {
+            switchState = !switchState;
+          }
+
+          return switchState;
+        });
+      }
+
+      console.log(lightsOn(5)); //[1,4]
+      console.log(lightsOn(3)); //[1]
+      console.log(lightsOn(2)); //[1]
+      console.log(lightsOn(1)); //[1]
+      console.log(lightsOn(0)); //[]
+      console.log(lightsOn(100)); //[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+    </script>
+  </body>
+</html>
