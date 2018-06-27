@@ -1,0 +1,46 @@
+input: n, odd integer, positive?
+output: printed rows forming a four pointed diamond
+mental model: create n rows (strings) containing n spaces + asterisks
+number of asterisks grow +2 until row (n + 1)/2
+then decreases +2 until row n
+number of spaces decrease -1 (starts with (n + 1)/2 - 1) until row (n + 1)/2
+increases +1 until row n
+
+test cases:
+diamond(1);
+*
+
+diamonds(3);
+ *
+***
+ *
+
+ diamonds(9);
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+
+diamond(17);
+
+data structures:
+strings
+
+algorithm:
+number of spaces = (n+1)/2 - 1
+number of asterisks = 1
+for each i from 1 to n, inclusive
+print spaces * number of spaces + diamonds * number of asterisks
+if i < (n+1)/2
+number of spaces -= 1
+number of asterisks += 2
+else
+number of spaces += 1
+number of asterisks -= 2
+
+

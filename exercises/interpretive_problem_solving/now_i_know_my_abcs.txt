@@ -1,0 +1,42 @@
+B:O   X:K   D:Q   C:P   N:A
+G:T   R:E   F:S   J:W   H:U
+V:I   L:Y   Z:M
+
+input: word string (letters)
+output: true if word can be spelled, false otherwise
+rules: case insensitive
+each block can be used only once
+which means word can't have repeated letters or two letters belonging to the same block
+mental model: we have to remove a block from the set each time a letter is used; if a block has already been removed, return false. if for every letter a block is available, return true
+for each letter, check if it belongs to a block in the set. if true, remove block and move to the next letter. if false, return false;
+
+test cases:
+
+isBlockWord('BATCH');      // true
+isBlockWord('BUTCH');      // false
+isBlockWord('jest');       // true
+isBlockWord('fff');       // false
+isBlockWord('BaTcH');       // true
+isBlockWord('CPCPPC');       // true
+isBlockWord('C');       // true
+
+data structure:
+
+array of strings (set of blocks)
+input is string
+boolean as output
+
+algorithm:
+
+for each letter,
+match the letter to a block in array.
+if match returns true, move to next letter
+if false, return the function as false
+if at the end of the loop all letters got a match, return true
+
+how to match letters to blocks:
+for each block in array, letter regexp test block
+if false, move to next block
+if true, remove block and return true
+if at the end of the loop no match is found, return false
+

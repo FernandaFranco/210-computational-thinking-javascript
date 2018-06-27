@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Caesar</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+input: plaintext, message as string containing letters and other chars
+key, number of positions to be shifted to the right
+output: ciphertext, shifted letters but other chars unchanged
+requirements: shift each letter to the letter n positions to the right, keep non letters the same
+rules:
+- if shift exceeds the last letter of the alphabet, wrap back to the beginning of the alphabet
+- cases stay the same after shifting
+- only letters are encrypted
+mental model:
+replace each letter in string with appropriate letter. if letter index + key is greater than alphabet size, move to the left. if not letter, keep the same. if upper case, keep upper case.
+
+test cases:
+// simple shift
+caesarEncrypt('A', 0);       // "A"
+caesarEncrypt('A', 3);       // "D"
+
+// wrap around
+caesarEncrypt('y', 5);       // "d"
+caesarEncrypt('a', 47);      // "v"
+
+// all letters
+caesarEncrypt('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 25);
+// "ZABCDEFGHIJKLMNOPQRSTUVWXY"
+caesarEncrypt('The quick brown fox jumps over the lazy dog!', 5);
+// "Ymj vznhp gwtbs ktc ozrux tajw ymj qfed itl!"
+
+// many non-letters
+caesarEncrypt('There are, as you can see, many punctuations. Right?; Wrong?', 2);
+// "Vjgtg ctg, cu aqw ecp ugg, ocpa rwpevwcvkqpu. Tkijv?; Ytqpi?"
+
+
+data structures:
+string to array for iteration
+character codes for shifting
+
+algorithm:
+for each char in array:
+if not letter, do nothing
+if letter, replace by letter in position + key
+if position + key > alphabet size, do position - key
+if letter upper case, keep uppercase
+otherwise, keep downcase
+return string
+      */
+
+      function caesarEncrypt(plaintext, key) {
+        var cypherText = plaintext.split('');
+        var charCode;
+        var shiftedCharCode;
+
+        return cypherText.map(function (char) {
+          charCode = char.charCodeAt(0);
+          shiftedCharCode = charCode + key;
+          if ((charCode >= 97 && charCode <= 122)) {
+            if (shiftedCharCode > 122) {
+              shiftedCharCode -= 26;
+            }
+             return String.fromCharCode(shiftedCharCode);
+          } else if ((charCode >= 65 && charCode <= 90)) {
+            if (shiftedCharCode > 90) {
+              shiftedCharCode -= 26;
+            }
+            return String.fromCharCode(shiftedCharCode);
+          }
+
+          return char;
+        }).join('');
+      }
+
+      function caesarEncrypt(plaintext, key) {
+        var cypherText = plaintext.split('');
+
+        return cypherText.map(function (char) {
+          if (isLetter(char)) {
+            return shiftedLetter(char, key);
+          } else {
+            return char;
+          }
+        }).join('');
+      }
+
+      function isLetter(char) {
+        pattern = /[a-z]/i;
+
+        return pattern.test(char);
+      }
+
+      function shiftedLetter(char, key) {
+        var charCode = char.charCodeAt(0);
+        var shiftedCharCode = charCode + key;
+        var shifted = String.fromCharCode(shiftedCharCode);
+        if (!isLetter(shifted)) {
+          shiftedCharCode -= 26;
+          shifted = String.fromCharCode(shiftedCharCode);
+        }
+
+        return shifted;
+      }
+
+      // simple shift
+      console.log(caesarEncrypt('A', 0));       // "A"
+      console.log(caesarEncrypt('A', 3));       // "D"
+
+      // wrap around
+      console.log(caesarEncrypt('y', 5));       // "d"
+      console.log(caesarEncrypt('a', 47));      // "v"
+
+      // all letters
+      console.log(caesarEncrypt('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 25));
+      // "ZABCDEFGHIJKLMNOPQRSTUVWXY"
+      console.log(caesarEncrypt('The quick brown fox jumps over the lazy dog!', 5));
+      // "Ymj vznhp gwtbs ktc ozrux tajw ymj qfed itl!"
+
+      // many non-letters
+      console.log(caesarEncrypt('There are, as you can see, many punctuations. Right?; Wrong?', 2));
+      // "Vjgtg ctg, cu aqw ecp ugg, ocpa rwpevwcvkqpu. Tkijv?; Ytqpi?"
+
+    </script>
+  </body>
+</html>

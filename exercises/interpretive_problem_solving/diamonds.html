@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Diamonds</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+//       algorithm:
+// number of spaces = (n+1)/2 - 1
+// number of asterisks = 1
+// for each i from 1 to n, inclusive
+// print spaces * number of spaces + diamonds * number of asterisks
+// if i < (n+1)/2
+// number of spaces -= 1
+// number of asterisks += 2
+// else
+// number of spaces += 1
+// number of asterisks -= 2
+
+  function diamonds(rows) {
+    var spacesNumber = ((rows + 1) / 2) - 1;
+    var asterisksNumber = 1;
+    var i;
+
+    for (i = 1; i <= rows; i += 1) {
+      console.log(getString(' ', spacesNumber) +
+                  getString('*', asterisksNumber));
+
+      if (i < (rows + 1) / 2) {
+        spacesNumber -= 1;
+        asterisksNumber += 2;
+      } else {
+        spacesNumber += 1;
+        asterisksNumber -= 2;
+      }
+    }
+  }
+
+  function getString(char, number) {
+    var string = '';
+    var i;
+
+    for (i = 1; i <= number; i += 1) {
+      string += char;
+    }
+
+    return string;
+  }
+
+  diamonds(1);
+
+  diamonds(3);
+
+  diamonds(9);
+
+  diamonds(17);
+
+  function hollowDiamonds(rows) {
+    var spacesNumber = ((rows + 1) / 2) - 1;
+    var asterisksNumber = 1;
+    var i;
+
+    for (i = 1; i <= rows; i += 1) {
+      console.log(getString(' ', spacesNumber) +
+                  getHollowString('*', asterisksNumber));
+
+      if (i < (rows + 1) / 2) {
+        spacesNumber -= 1;
+        asterisksNumber += 2;
+      } else {
+        spacesNumber += 1;
+        asterisksNumber -= 2;
+      }
+    }
+  }
+
+  function getHollowString(char, number) {
+    var string = char;
+    var i;
+
+    for (i = 2; i < number; i += 1) {
+      string += ' ';
+    }
+
+    if (number > 1) {
+      string += char;
+    }
+
+    return string;
+  }
+
+  hollowDiamonds(1);
+
+  hollowDiamonds(3);
+
+  hollowDiamonds(9);
+
+  hollowDiamonds(17);
+
+    </script>
+  </body>
+</html>

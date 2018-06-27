@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>ABCs</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*for each letter,
+match the letter to a block in array.
+if match returns true, move to next letter
+if false, return the function as false
+if at the end of the loop all letters got a match, return true
+
+how to match letters to blocks:
+for each block in array, letter regexp test block
+if false, move to next block
+if true, remove block and return true
+if at the end of the loop no match is found, return false
+*/
+      var blocks;
+
+      function isBlockWord(word) {
+        blocks = ['BO', 'XK', 'DQ', 'CP', 'NA', 'GT', 'RE', 'FS', 'JW', 'HU', 'VI', 'LY', 'ZM'];
+        var i;
+
+        for (i = 0; i < word.length; i += 1) {
+          if (!isBlockAvailable(word[i])) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+
+      function isBlockAvailable(letter) {
+        var i;
+
+        for (i = 0; i < blocks.length; i += 1) {
+          if (blocks[i].includes(letter.toUpperCase())) {
+            blocks.splice(i, 1);
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+
+
+      console.log(isBlockWord('BATCH'));      // true
+      console.log(isBlockWord('BUTCH'));      // false
+      console.log(isBlockWord('jest'));       // true
+      console.log(isBlockWord('fff'));       // false
+      console.log(isBlockWord('BaTcH'));       // true
+      console.log(isBlockWord('CPCPPC'));       // false
+      console.log(isBlockWord('C'));       // true
+
+    </script>
+  </body>
+</html>
