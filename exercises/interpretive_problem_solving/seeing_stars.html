@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Seeing Stars</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+input: odd integer >= 7 n to form grid n by n
+output: not important. has to print to the screen a asterisk shape on a n by n grid, formed by asterisks
+mental model: for each row from 1 to n, prints string containing spaces and asterisks. middle row (n + 1)/2 has n asterisks. other rows have exactly 3 asterisks.
+first line: 0 space, 1 asterisk, (n - 3)/2 spaces, 1 asterisk, (n - 3)/2 spaces, 1 asterisk
+second line: 1 space, 1 asterisk, (n-3)/2 -1 spaces, 1 asterisk, (n-3)/2 -1 spaces, 1 asterisk, 1 space
+
+
+test cases:
+star(7);
+*  *  *
+ * * *
+  ***
+*******
+  ***
+ * * *
+*  *  *
+star(9);
+*   *   *
+ *  *  *
+  * * *
+   ***
+*********
+   ***
+  * * *
+ *  *  *
+*   *   *
+star(11);
+*    *    *
+ *   *   *
+  *  *  *
+   * * *
+    ***
+***********
+    ***
+   * * *
+  *  *  *
+ *   *   *
+*    *    *
+
+data structure: string
+
+algorithm:
+edgeSpaces = 0
+middleSpaces = (n + 1) / 2
+for row from 1 to (n + 1) / 2:
+  prints string
+  edgeSpaces += 1
+  middleSpaces -= 1
+
+on row (n + 1) / 2, prints n asterisks
+
+for row from (n + 1) / 2 + 1 to n:
+  prints string
+  edgeSpaces -= 1
+  middleSpaces += 1
+
+
+      */
+
+      function star(n) {
+        var padding = 0;
+        var middleSpaces = (n - 3) / 2;
+        var i;
+
+        for (i = 1; i < (n + 1) / 2; i += 1) {
+          console.log(row(padding, middleSpaces));
+          padding += 1;
+          middleSpaces -= 1;
+        }
+
+        console.log('*'.repeat(n));
+
+        padding -= 1;
+        middleSpaces += 1
+        for (i = ((n + 1) / 2) + 1; i <= n; i += 1) {
+          console.log(row(padding, middleSpaces));
+          padding -= 1;
+          middleSpaces += 1;
+        }
+      }
+
+      function row(padding, middleSpaces) {
+        return ' '.repeat(padding) + '*' + ' '.repeat(middleSpaces)
+               + '*' + ' '.repeat(middleSpaces) + '*' + ' '.repeat(padding);
+      }
+
+      star(7);
+      console.log('     ')
+      star(9);
+      console.log('     ')
+      star(23);
+      console.log('     ')
+
+    </script>
+  </body>
+</html>

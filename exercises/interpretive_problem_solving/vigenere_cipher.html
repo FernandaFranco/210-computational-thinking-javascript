@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Vigenere</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+input: plaintext, string of letters and other chars; keyword, case insensitive
+output: ciphertext, non letter chars unchanged
+rules:
+- keyword should be repeated until it has same length as message string without non letters
+- each letter in keyword corresponds to a number from 0 to 25
+- each number indicates the number of positions to be shifted
+- letters should be replaced by their shifted correspondents
+- non letter chars stay unchanged
+- keyword letters are case insensitive
+mental model:
+use a string of repeated keyword letters to determine how many positions a letter in the original message should be shifted.
+
+test cases:
+VigenereEncrypt('Pineapples don't go on pizzas!', 'meat') // 'Bmnxmtpeqw dhz'x gh ar pbldal!'
+VigenereEncrypt('Pineapples don't go on pizzas!', 'a') // 'Pineapples don't go on pizzas!'
+VigenereEncrypt('Pineapples don't go on pizzas!', 'MeAt') // 'Bmnxmtpeqw dhz'x gh ar pbldal!'
+VigenereEncrypt('AbCd', 'zzzz') // 'ZaBc'
+VigenereEncrypt('AbCd', 'zzz') // 'ZaBc'
+VigenereEncrypt('A!b@C d', 'zzz') // 'Z!a@B c'
+
+data structures:
+string of repeated keyword
+array of keyword letters -> map to numbers
+array of chars in message -> map using caesar cipher
+
+algorithm:
+split message on non letter chars -> length
+create string of repeated keyword, same length
+split into letters
+map to numbers
+
+for each char in message
+if letter:
+call caesar cipher on letter + first key number not used
+return shifted letter
+if not letter, return same char
+      */
+
+    function VigenereEncrypt(plaintext, keyword) {
+      var lettersCount = plaintext.replace(/[^a-z]/gi, '').length;
+      var repeatedKeyword = keyword;
+      var keyNumbers;
+      var charcode;
+
+      while (repeatedKeyword.length < lettersCount) {
+        repeatedKeyword += keyword;
+      }
+
+      keyNumbers = repeatedKeyword.split('').map(function (letter) {
+        charcode = letter.toLowerCase().charCodeAt(0);
+        return charcode - 97;
+      });
+
+      return plaintext.split('').map(function (char) {
+        if (/[^a-z]/i.test(char)) {
+          return char;
+        } else {
+          return caesarEncrypt(char, keyNumbers.shift());
+        }
+      }).join('');
+    }
+
+    function caesarEncrypt(plaintext, key) {
+      var cypherText = plaintext.split('');
+
+      return cypherText.map(function (char) {
+        if (isLetter(char)) {
+          return shiftedLetter(char, key);
+        } else {
+          return char;
+        }
+      }).join('');
+    }
+
+    function isLetter(char) {
+      pattern = /[a-z]/i;
+
+      return pattern.test(char);
+    }
+
+    function isUpperCaseLetter(char) {
+      pattern = /[A-Z]/;
+
+      return pattern.test(char);
+    }
+
+    function shiftedLetter(char, key) {
+      var charCode = char.charCodeAt(0);
+      var shiftedCharCode = charCode + key;
+      var shifted = String.fromCharCode(shiftedCharCode);
+      if (shifted > 'z' || (isUpperCaseLetter(char) && !isUpperCaseLetter(shifted))) {
+        shiftedCharCode -= 26;
+        shifted = String.fromCharCode(shiftedCharCode);
+      }
+
+      return shifted;
+    }
+
+    console.log(VigenereEncrypt('Pineapples don\'t go on pizzas!', 'meat')); // 'Bmnxmtpeqw dhz'x gh ar pbldal!'
+    console.log(VigenereEncrypt('Pineapples don\'t go on pizzas!', 'a')); // 'Pineapples don't go on pizzas!'
+    console.log(VigenereEncrypt('Pineapples don\'t go on pizzas!', 'MeAt')); // 'Bmnxmtpeqw dhz'x gh ar pbldal!'
+    console.log(VigenereEncrypt('AbCd', 'zzzz')); // 'ZaBc'
+    console.log(VigenereEncrypt('AbCd', 'zzz')); // 'ZaBc'
+    console.log(VigenereEncrypt('A!b@C d', 'zzz')); // 'Z!a@B c'
+    console.log(VigenereEncrypt('Dog', 'rabbit')); // 'Uoh'
+
+
+    </script>
+  </body>
+</html>

@@ -94,11 +94,17 @@ return string
         return pattern.test(char);
       }
 
+      function isUpperCaseLetter(char) {
+        pattern = /[A-Z]/;
+
+        return pattern.test(char);
+      }
+
       function shiftedLetter(char, key) {
         var charCode = char.charCodeAt(0);
         var shiftedCharCode = charCode + key;
         var shifted = String.fromCharCode(shiftedCharCode);
-        if (!isLetter(shifted)) {
+        if (shifted > 'z' || (isUpperCaseLetter(char) && !isUpperCaseLetter(shifted))) {
           shiftedCharCode -= 26;
           shifted = String.fromCharCode(shiftedCharCode);
         }
