@@ -152,5 +152,30 @@ JavaScript doesn't provide as many functional abstractions and data structures a
 
 The lack of many common abstractions is why many people use libraries like Underscore or Lodash to enhance JavaScript with more functional abstractions.
 
+DECLARATIVE PROGRAMMING
+
+The higher the level of abstraction that you work with, the more declarative your code is.
+
+FIRST CLASS FUNCTIONS?
+
+https://hackernoon.com/effective-functional-javascript-first-class-and-higher-order-functions-713fde8df50a
+
+"A language with first-class functions means that it treats functions like expressions of any other type. Functions are like any other object."
+
+Javascript functions are first class functions.
+
+Mdn:
+A programming language is said to have First-class functions when functions in that language are treated like any other variable. For example, in such a language, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
+
+HIGHER ORDER FUNCTIONS? AKA CALLBACK FUNCTIONS
+
+"A function is a higher order function if it takes a function as a parameter, or returns a function as its result. Both of these requirements rely on functions being first-class objects in a language.
+
+map, filter and reduce/reduceRightare the functions present in JavaScript that map to classic higher order functions in other functional languages.
+"
+
+A higher order function takes first class functions as a argument or returns a first class function as a result.
+
+"Use first-class and higher order functions to write nicer code more easily. It’s nice and declarative instead of imperative"
 
 
