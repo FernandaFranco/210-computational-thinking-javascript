@@ -19,32 +19,6 @@ merge([1, 4, 5], []);             // [1, 4, 5]
 
 */
 
-function merge(array1, array2) {
-  var newArray = [];
-  var array1Idx = 0;
-  var array2Idx = 0;
-
-  while (true) {
-    if (!array1[array1Idx]) {
-      newArray = newArray.concat(array2.slice(array2Idx));
-      break;
-    } else if (!array2[array2Idx]) {
-      newArray = newArray.concat(array1.slice(array1Idx));
-      break;
-    }
-
-    if (array1[array1Idx] < array2[array2Idx]) {
-      newArray.push(array1[array1Idx]);
-      array1Idx += 1;
-    } else {
-      newArray.push(array2[array2Idx]);
-      array2Idx += 1;
-    }
-  }
-
-  return newArray;
-}
-
 console.log(merge([1, 5, 9], [2, 6, 8]));      // [1, 2, 5, 6, 8, 9]
 console.log(merge([1, 1, 3], [2, 2]));         // [1, 1, 2, 2, 3]
 console.log(merge([], [1, 4, 5]));             // [1, 4, 5]
